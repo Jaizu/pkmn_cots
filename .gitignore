@@ -34,3 +34,7 @@ porymap.project.cfg
 *.a
 .fuse_hidden*
 *.sna
+/*.png
+/*.gif
+/*.zip
+/*.rar
