@@ -5,3 +5,5 @@ headers.inc
 **/connections.inc
 **/events.inc
 **/header.inc
+**/scripts.inc
+
