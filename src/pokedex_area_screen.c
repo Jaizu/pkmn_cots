@@ -20,6 +20,8 @@
 #include "constants/region_map_sections.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
+#include "constants/day_night.h"
+#include "day_night.h"
 
 #define AREA_SCREEN_WIDTH 32
 #define AREA_SCREEN_HEIGHT 20
@@ -461,15 +463,29 @@ static bool8 MapHasMon(const struct WildPokemonHeader *info, u16 species)
             return FALSE;
     }
 
-    if (MonListHasMon(info->landMonsInfo, species, 12))
-        return TRUE;
-    if (MonListHasMon(info->waterMonsInfo, species, 5))
-        return TRUE;
-    if (MonListHasMon(info->fishingMonsInfo, species, 12))
-        return TRUE;
-    if (MonListHasMon(info->rockSmashMonsInfo, species, 5))
-        return TRUE;
-    return FALSE;
+    if (GetCurrentTimeOfDay() == TIME_NIGHT)
+	{
+		if (MonListHasMon(info->landMonsNightInfo, species, 12))
+			return TRUE;
+		if (MonListHasMon(info->waterMonsNightInfo, species, 5))
+			return TRUE;
+		if (MonListHasMon(info->fishingMonsNightInfo, species, 12))
+			return TRUE;
+		if (MonListHasMon(info->rockSmashMonsNightInfo, species, 5))
+			return TRUE;
+	}
+	else
+	{
+		if (MonListHasMon(info->landMonsInfo, species, 12))
+			return TRUE;
+		if (MonListHasMon(info->waterMonsInfo, species, 5))
+			return TRUE;
+		if (MonListHasMon(info->fishingMonsInfo, species, 12))
+			return TRUE;
+		if (MonListHasMon(info->rockSmashMonsInfo, species, 5))
+			return TRUE;
+	}
+	return FALSE;
 }
 
 static bool8 MonListHasMon(const struct WildPokemonInfo *info, u16 species, u16 size)
