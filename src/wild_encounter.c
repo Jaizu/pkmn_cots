@@ -230,22 +230,37 @@ static u8 ChooseWildMonIndex_Fishing(u8 rod)
 
 static u8 ChooseWildMonLevel(const struct WildPokemon *wildPokemon)
 {
-    u8 min;
-    u8 max;
+    s8 min;
+    s8 max;
     u8 range;
     u8 rand;
+	u8 i;
+	u8 highestPartyLevel = 1;
 
     // Make sure minimum level is less than maximum level
-    if (wildPokemon->maxLevel >= wildPokemon->minLevel)
-    {
-        min = wildPokemon->minLevel;
-        max = wildPokemon->maxLevel;
-    }
-    else
-    {
-        min = wildPokemon->maxLevel;
-        max = wildPokemon->minLevel;
-    }
+    //if (wildPokemon->maxLevel >= wildPokemon->minLevel)
+    //{
+    //    min = wildPokemon->minLevel;
+    //    max = wildPokemon->maxLevel;
+    //}
+    //else
+    //{
+    //    min = wildPokemon->maxLevel;
+    //    max = wildPokemon->minLevel;
+    //}
+	
+	for (i = 0; i < CalculatePlayerPartyCount(); i++)
+	{
+		if (GetMonData(&gPlayerParty[i], MON_DATA_LEVEL) > highestPartyLevel)
+			highestPartyLevel = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
+	}
+	
+	min = highestPartyLevel - 3;
+	max = highestPartyLevel + 3;
+	if (min <= 0)
+		min = 1;
+	if (max > 100)
+		max = 100;
     range = max - min + 1;
     rand = Random() % range;
 
