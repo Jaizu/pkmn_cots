@@ -237,18 +237,6 @@ static u8 ChooseWildMonLevel(const struct WildPokemon *wildPokemon)
 	u8 i;
 	u8 highestPartyLevel = 1;
 
-    // Make sure minimum level is less than maximum level
-    //if (wildPokemon->maxLevel >= wildPokemon->minLevel)
-    //{
-    //    min = wildPokemon->minLevel;
-    //    max = wildPokemon->maxLevel;
-    //}
-    //else
-    //{
-    //    min = wildPokemon->maxLevel;
-    //    max = wildPokemon->minLevel;
-    //}
-	
 	for (i = 0; i < CalculatePlayerPartyCount(); i++)
 	{
 		if (GetMonData(&gPlayerParty[i], MON_DATA_LEVEL) > highestPartyLevel)
