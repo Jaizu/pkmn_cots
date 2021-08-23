@@ -1737,3 +1737,23 @@ gTilesetPalOverride_General01::
 .align 2
 gTilesetPalOverride_General05::
 	.incbin "data/tilesets/primary/general/palettes/05_over.gbapal"
+
+	.align 2
+gTilesetPalettes_Outside::
+	.incbin "data/tilesets/primary/outside/palettes/00.gbapal"
+	.incbin "data/tilesets/primary/outside/palettes/01.gbapal"
+	.incbin "data/tilesets/primary/outside/palettes/02.gbapal"
+	.incbin "data/tilesets/primary/outside/palettes/03.gbapal"
+	.incbin "data/tilesets/primary/outside/palettes/04.gbapal"
+	.incbin "data/tilesets/primary/outside/palettes/05.gbapal"
+	.incbin "data/tilesets/primary/outside/palettes/06.gbapal"
+	.incbin "data/tilesets/primary/outside/palettes/07.gbapal"
+	.incbin "data/tilesets/primary/outside/palettes/08.gbapal"
+	.incbin "data/tilesets/primary/outside/palettes/09.gbapal"
+	.incbin "data/tilesets/primary/outside/palettes/10.gbapal"
+	.incbin "data/tilesets/primary/outside/palettes/11.gbapal"
+	.incbin "data/tilesets/primary/outside/palettes/12.gbapal"
+
+	.align 2
+gTilesetTiles_Outside::
+	.incbin "data/tilesets/primary/outside/tiles.4bpp.lz"
