@@ -138,6 +138,8 @@ TOOLDIRS := $(filter-out tools/agbcc tools/binutils tools/poryscript,$(wildcard 
 TOOLBASE = $(TOOLDIRS:tools/%=%)
 TOOLS = $(foreach tool,$(TOOLBASE),tools/$(tool)/$(tool)$(EXE))
 
+SCRIPT := tools/poryscript/poryscript$(EXE)
+
 MAKEFLAGS += --no-print-directory
 
 # Clear the default suffixes
