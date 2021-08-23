@@ -1,31 +1,25 @@
-# Pokémon Emerald
+# Pokémon Calm of the Seas
 
-This is a decompilation of Pokémon Emerald.
+This is a fangame based on the decompilation of Pokémon Emerald, made by Jaizu.
 
-It builds the following ROM:
-
-* [**pokeemerald.gba**](https://datomatic.no-intro.org/index.php?page=show_record&s=23&n=1961) `sha1: f3ae088181bf583e55daf962a92bb46f4f1d07b7`
-
-To set up the repository, see [INSTALL.md](INSTALL.md).
+This game is meant to be an open world fangame, greatly inspired by Zelda BOTW.
 
 
-## See also
+## How can I contribute to the project?
 
-Other disassembly and/or decompilation projects:
-* [**Pokémon Red and Blue**](https://github.com/pret/pokered)
-* [**Pokémon Gold and Silver (Space World '97 demo)**](https://github.com/pret/pokegold-spaceworld)
-* [**Pokémon Yellow**](https://github.com/pret/pokeyellow)
-* [**Pokémon Trading Card Game**](https://github.com/pret/poketcg)
-* [**Pokémon Pinball**](https://github.com/pret/pokepinball)
-* [**Pokémon Stadium**](https://github.com/pret/pokestadium)
-* [**Pokémon Gold and Silver**](https://github.com/pret/pokegold)
-* [**Pokémon Crystal**](https://github.com/pret/pokecrystal)
-* [**Pokémon Ruby and Sapphire**](https://github.com/pret/pokeruby)
-* [**Pokémon Pinball: Ruby & Sapphire**](https://github.com/pret/pokepinballrs)
-* [**Pokémon FireRed and LeafGreen**](https://github.com/pret/pokefirered)
-* [**Pokémon Mystery Dungeon: Red Rescue Team**](https://github.com/pret/pmd-red)
+You are free to submit PRs whenever you want.
+
+If you want to take a look of a to-do list, you can check the [Projects page](https://github.com/Jaizu/pkmn_cots/projects).
+
+If you contribute feel free to add yourself to [CREDITS.md](https://github.com/Jaizu/pkmn_cots/blob/master/CREDITS.md).
 
 
-## Contacts
+## What can/can't I use from the project?
 
-You can find us on [Discord](https://discord.gg/d5dubZ3) and [IRC](https://kiwiirc.com/client/irc.freenode.net/?#pret).
+* You are free to take mechanics and code related stuff, always crediting the authors.
+* You can not take the following systems, since they belong to [Pokémon Polar](https://jaizu.moe/discord): Start Menu, Quest System. (yet to be implemented)
+* Graphical resources that are modified for this game; I credited everybody, so if you need something you can try your luck looking in the credits file.
+
+## Credits
+
+Check the [CREDITS.md](https://github.com/Jaizu/pkmn_cots/blob/master/CREDITS.md) file.
