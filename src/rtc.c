@@ -2,6 +2,7 @@
 #include "rtc.h"
 #include "string_util.h"
 #include "text.h"
+#include "event_data.h"
 
 // iwram bss
 static u16 sErrorStatus;
@@ -288,6 +289,7 @@ void RtcCalcTimeDifference(struct SiiRtcInfo *rtc, struct Time *result, struct T
     result->minutes = ConvertBcdToBinary(rtc->minute) - t->minutes;
     result->hours = ConvertBcdToBinary(rtc->hour) - t->hours;
     result->days = days - t->days;
+	result->dayOfWeek = ConvertBcdToBinary(rtc->dayOfWeek) - t->dayOfWeek;
 
     if (result->seconds < 0)
     {
@@ -305,7 +307,13 @@ void RtcCalcTimeDifference(struct SiiRtcInfo *rtc, struct Time *result, struct T
     {
         result->hours += 24;
         --result->days;
+		--result->dayOfWeek;
     }
+
+	if (result->dayOfWeek < 0)
+	{
+		result->dayOfWeek += 7;
+	}
 }
 
 void RtcCalcLocalTime(void)
@@ -341,6 +349,7 @@ void CalcTimeDifference(struct Time *result, struct Time *t1, struct Time *t2)
     result->minutes = t2->minutes - t1->minutes;
     result->hours = t2->hours - t1->hours;
     result->days = t2->days - t1->days;
+	result->dayOfWeek = t2->dayOfWeek - t1->dayOfWeek;
 
     if (result->seconds < 0)
     {
@@ -358,7 +367,13 @@ void CalcTimeDifference(struct Time *result, struct Time *t1, struct Time *t2)
     {
         result->hours += 24;
         --result->days;
+		--result->dayOfWeek;
     }
+
+	if (result->dayOfWeek < 0)
+	{
+		result->dayOfWeek += 7;
+	}
 }
 
 u32 RtcGetMinuteCount(void)
@@ -370,4 +385,15 @@ u32 RtcGetMinuteCount(void)
 u32 RtcGetLocalDayCount(void)
 {
     return RtcGetDayCount(&sRtc);
+}
+
+void RtcSetDayOfWeek(void)
+{
+	RtcCalcLocalTime();
+	if (gSpecialVar_0x8004 > 6)
+		gLocalTime.dayOfWeek = 0;
+	else
+		gLocalTime.dayOfWeek = gSpecialVar_0x8004;
+	RtcGetInfo(&sRtc);
+	RtcCalcTimeDifference(&sRtc, &gSaveBlock2Ptr->localTimeOffset, &gLocalTime);
 }

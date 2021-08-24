@@ -10,6 +10,9 @@
 #include "constants/day_night.h"
 #include "constants/region_map_sections.h"
 #include "constants/rgb.h"
+#include "string_util.h"
+#include "strings.h"
+#include "event_data.h"
 
 #define TINT_MORNING Q_8_8(0.7), Q_8_8(0.7), Q_8_8(0.9)
 #define TINT_DAY Q_8_8(1.0), Q_8_8(1.0), Q_8_8(1.0)
@@ -59,6 +62,31 @@ static const u16 sTimeOfDayTints[][3] = {
     [22] =  {TINT_NIGHT},
     [23] =  {TINT_NIGHT},
 };
+
+const u8 *const gDayOfWeekTable[] = 
+{
+	gText_Monday,
+	gText_Tuesday,
+	gText_Wednesday,
+	gText_Thursday,
+	gText_Friday,
+	gText_Saturday,
+	gText_Sunday
+};
+
+void BufferCurrentDayOfWeekString(void)
+{
+	RtcCalcLocalTime();
+	StringCopy(gStringVar1, gDayOfWeekTable[gLocalTime.dayOfWeek]);
+}
+
+void BufferDayOfWeekString(void)
+{
+	if (gSpecialVar_0x8004 <= DAY_SUNDAY)
+		StringCopy(gStringVar1, gDayOfWeekTable[gSpecialVar_0x8004]);
+	else
+		StringCopy(gStringVar1, gText_FiveMarks);
+}
 
 u8 GetCurrentTimeOfDay(void)
 {

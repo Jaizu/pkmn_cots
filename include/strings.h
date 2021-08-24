@@ -3017,4 +3017,12 @@ extern const u8 gText_PkmnForSwap[];
 extern const u8 gText_SamePkmnInPartyAlready[];
 extern const u8 gText_Cancel3[];
 
+extern const u8 gText_Monday[];
+extern const u8 gText_Tuesday[];
+extern const u8 gText_Wednesday[];
+extern const u8 gText_Thursday[];
+extern const u8 gText_Friday[];
+extern const u8 gText_Saturday[];
+extern const u8 gText_Sunday[];
+
 #endif // GUARD_STRINGS_H
