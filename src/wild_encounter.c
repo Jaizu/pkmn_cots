@@ -230,43 +230,26 @@ static u8 ChooseWildMonIndex_Fishing(u8 rod)
 
 static u8 ChooseWildMonLevel(const struct WildPokemon *wildPokemon)
 {
-    s8 min;
-    s8 max;
-    u8 range;
-    u8 rand;
-	u8 i;
-	u8 highestPartyLevel = 1;
+    u32 level, i, levelCheck;
+    u32 percent = ((Random() % 100) < 30) ? 80 : ((Random() % 100) < 70) ? 90 : 100;
+    u8 minus; 
 
-	for (i = 0; i < CalculatePlayerPartyCount(); i++)
+	level = 1;
+    
+	for (i = 0; i < gPlayerPartyCount; i++)
 	{
-		if (GetMonData(&gPlayerParty[i], MON_DATA_LEVEL) > highestPartyLevel)
-			highestPartyLevel = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
+        levelCheck = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
+		if (levelCheck > level)
+            level = levelCheck;
 	}
-	
-	min = highestPartyLevel - 3;
-	max = highestPartyLevel + 3;
-	if (min <= 0)
-		min = 1;
-	if (max > 100)
-		max = 100;
-    range = max - min + 1;
-    rand = Random() % range;
 
-    // check ability for max level mon
-    if (!GetMonData(&gPlayerParty[0], MON_DATA_SANITY_IS_EGG))
-    {
-        u16 ability = GetMonAbility(&gPlayerParty[0]);
-        if (ability == ABILITY_HUSTLE || ability == ABILITY_VITAL_SPIRIT || ability == ABILITY_PRESSURE)
-        {
-            if (Random() % 2 == 0)
-                return max;
+    if (!FlagGet(FLAG_COMPLETED_FIST_AREA))
+        minus = 1;
 
-            if (rand != 0)
-                rand--;
-        }
-    }
+    level = (level * percent) / 100;
+    level = level - minus;
 
-    return min + rand;
+    return level;
 }
 
 static u16 GetCurrentMapWildMonHeaderId(void)
