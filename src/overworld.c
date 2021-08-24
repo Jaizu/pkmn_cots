@@ -25,6 +25,7 @@
 #include "gpu_regs.h"
 #include "heal_location.h"
 #include "io_reg.h"
+#include "item.h"
 #include "link.h"
 #include "link_rfu.h"
 #include "load_save.h"
@@ -61,6 +62,7 @@
 #include "wild_encounter.h"
 #include "frontier_util.h"
 #include "constants/abilities.h"
+#include "constants/items.h"
 #include "constants/layouts.h"
 #include "constants/map_types.h"
 #include "constants/maps.h"
@@ -1536,6 +1538,9 @@ void CB2_NewGame(void)
     gFieldCallback2 = NULL;
     DoMapLoadLoop(&gMain.state);
     SetFieldVBlankCallback();
+    #ifdef ENABLE_DEBUGGER
+    AddBagItem(ITEM_DEBUGGER, 1);
+    #endif
     SetMainCallback1(CB1_Overworld);
     SetMainCallback2(CB2_Overworld);
 }

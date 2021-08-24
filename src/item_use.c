@@ -9,6 +9,7 @@
 #include "bike.h"
 #include "coins.h"
 #include "data.h"
+#include "debug.h"
 #include "event_data.h"
 #include "event_object_lock.h"
 #include "event_object_movement.h"
@@ -966,6 +967,10 @@ void ItemUseInBattle_PokeBall(u8 taskId)
         else
             DisplayItemMessageInBattlePyramid(taskId, textCantThrowPokeBall, Task_CloseBattlePyramidBagMessage);
     }
+    if (FlagGet(FLAG_SYS_NO_CATCHING)){ //DEBUG
+        static const u8 sText_BallsCannotBeUsed[] = _("Poké Balls cannot be used\nright now!\p");
+        DisplayItemMessage(taskId, 1, sText_BallsCannotBeUsed, CloseItemMessage);        
+    } //
     else if (IsPlayerPartyAndPokemonStorageFull() == FALSE) // have room for mon?
     {
         RemoveBagItem(gSpecialVar_ItemId, 1);
@@ -1146,6 +1151,19 @@ void ItemUseInBattle_EnigmaBerry(u8 taskId)
         ItemUseOutOfBattle_CannotUse(taskId);
         break;
     }
+}
+
+static void ItemUseOnFieldCB_Debug(u8 taskId)
+{
+    FreezeObjects_WaitForPlayer();
+    Debug_ShowMainMenu();
+    DestroyTask(taskId);
+}
+
+void ItemUseOutOfBattle_DebugMenu(u8 taskId)
+{
+    sItemUseOnFieldCB = ItemUseOnFieldCB_Debug;
+    SetUpItemUseOnFieldCallback(taskId);
 }
 
 void ItemUseOutOfBattle_CannotUse(u8 taskId)

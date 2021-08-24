@@ -7547,4 +7547,17 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = 255  //signature z move
     },
+    
+    [ITEM_DEBUGGER] =
+    {
+        .name = _("Debugger"),
+        .itemId = ITEM_DEBUGGER,
+        .price = 0,
+        .description = sDummyDesc,
+        .importance = 1,
+        .unk19 = 1,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_DebugMenu,
+    },
 };
