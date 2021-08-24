@@ -38,3 +38,4 @@ porymap.project.cfg
 /*.gif
 /*.zip
 /*.rar
+data/scripts/debug.inc

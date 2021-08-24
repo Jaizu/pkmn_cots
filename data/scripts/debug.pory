@@ -1,14 +1,10 @@
+raw `
 Debug_ShowFieldMessageStringVar4::
 	special ShowFieldMessageStringVar4
 	waitmessage
 	waitbuttonpress
 	releaseall
 	end
-
-Debug_CheckWeekDay_Text:
-	.string "Aaaaah, yes!\l"
-	.string "{STR_VAR_1}s are made for dads!\l"
-	.string "And dad's car!$"
 
 Debug_CheatStart::
 	lockall
@@ -82,3 +78,4 @@ Debug_Script_7::
 
 Debug_Script_8::
 	end
+`
