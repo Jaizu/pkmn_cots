@@ -917,4 +917,5 @@ gTileset_Outside::
 	.4byte gTilesetPalettes_Outside
 	.4byte gMetatiles_Outside
 	.4byte gMetatileAttributes_Outside
-	.4byte NULL
+	.4byte NULL @ animation callback
+	.4byte NULL @ palette overrides
