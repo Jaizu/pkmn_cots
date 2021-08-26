@@ -1516,6 +1516,7 @@ static void Task_ControlStartMenu(u8 taskId)
                 }
                 else
                 {
+					sStartMenuData->saveMenuActive = FALSE;
                     tState = 0;
                 }
             }
@@ -1923,7 +1924,6 @@ static bool8 SaveCallback(void)
     case SAVE_IN_PROGRESS:
         return FALSE;
     case SAVE_CANCELED: // Back to start menu
-		sStartMenuData->saveMenuActive = FALSE;
         ClearDialogWindowAndFrameToTransparent(0, FALSE);
         InitStartMenu();
         gMenuCallback = HandleStartMenuInput;
