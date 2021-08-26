@@ -107,6 +107,7 @@ struct StartMenuData
     bool8 objectiveToggle;
     u8 selectorNormalSprite;
     u8 selectorShoeSprite;
+	bool8 saveMenuActive;
 };
 
 struct MenuActionStartMenu
@@ -1289,7 +1290,7 @@ static void FullscreenStartMenu_PrintActions(void)
 
 static void Task_ControlStartMenu(u8 taskId)
 {
-	if (!sStartMenuData->requestScrollOut)
+	if (!sStartMenuData->requestScrollOut && !sStartMenuData->saveMenuActive)
 		UpdateHeaderText();
 
     switch(tState)
@@ -1431,6 +1432,7 @@ static void Task_ControlStartMenu(u8 taskId)
                 else if(sStartMenuItems[sCurrentStartMenuActions[sStartMenuCursorPos]].iconAnimId == FSM_ICON_SAVE)
                 {
                     PlaySE(SE_SELECT);
+					sStartMenuData->saveMenuActive = TRUE;
                     tState = 20;
                 }
                 else
@@ -1921,6 +1923,7 @@ static bool8 SaveCallback(void)
     case SAVE_IN_PROGRESS:
         return FALSE;
     case SAVE_CANCELED: // Back to start menu
+		sStartMenuData->saveMenuActive = FALSE;
         ClearDialogWindowAndFrameToTransparent(0, FALSE);
         InitStartMenu();
         gMenuCallback = HandleStartMenuInput;
