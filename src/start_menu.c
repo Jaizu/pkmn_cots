@@ -193,6 +193,8 @@ static void Task_SaveAfterLinkBattle(u8 taskId);
 static void Task_WaitForBattleTowerLinkSave(u8 taskId);
 static bool8 FieldCB_ReturnToFieldStartMenu(void);
 
+static void UpdateHeaderText(void);
+
 static const struct WindowTemplate sSafariBallsWindowTemplate = {0, 1, 1, 9, 4, 0xF, 8};
 
 static const u8* const sPyramidFloorNames[] =
@@ -1150,25 +1152,53 @@ static void FullscreenStartMenu_CreateSelectors(void)
         gSprites[sStartMenuData->selectorShoeSprite].invisible = TRUE;
 }
 
-static const u8 gText_StartMenu_CurrentTime[] = _("{STR_VAR_1}, 11:54 am");
+static const u8 gText_StartMenu_CurrentTimeAM[] = _("{STR_VAR_1}, {STR_VAR_2}:{STR_VAR_3} am");
+static const u8 gText_StartMenu_CurrentTimeAMOff[] = _("{STR_VAR_1}, {STR_VAR_2}  {STR_VAR_3} am");
+static const u8 gText_StartMenu_CurrentTimePM[] = _("{STR_VAR_1}, {STR_VAR_2}:{STR_VAR_3} pm");
+static const u8 gText_StartMenu_CurrentTimePMOff[] = _("{STR_VAR_1}, {STR_VAR_2}  {STR_VAR_3} pm");
 static const u8 gText_PlaceHolderText2[] = _("Something useful will be here!\nSomeday, maybe.");
-static const u8 gText_StartMenu_TimeOfDay[] = _("{STR_VAR_2}");
+static const u8 gText_StartMenu_TimeOfDay[] = _("{STR_VAR_1}");
 
 static void FullscreenStartMenu_PrintHeaderText(void)
 {
-    //TODO: Print header hour and useful info
-    u8 x;
-    u32 timeofday = GetCurrentTimeOfDay();
+	UpdateHeaderText();
+    PutWindowTilemap(WIN_FSM_QUEST_TOP);
+}
+
+static void UpdateHeaderText(void)
+{
+    //TODO: Print useful info
+	u8 x;
 
     FillWindowPixelBuffer(WIN_FSM_QUEST_TOP, PIXEL_FILL(7));
-    
 	RtcCalcLocalTime();
     StringExpandPlaceholders(gStringVar1, gDayOfWeekTable[gLocalTime.dayOfWeek]);
-    StringCopy(gStringVar4, gText_StartMenu_CurrentTime);
-    StringExpandPlaceholders(gStringVar4, gText_StartMenu_CurrentTime);
+	if (gLocalTime.hours >= 12)
+	{
+		if (gLocalTime.hours == 12)
+			ConvertIntToDecimalStringN(gStringVar2, 12, STR_CONV_MODE_LEADING_ZEROS, 2);
+		else
+			ConvertIntToDecimalStringN(gStringVar2, gLocalTime.hours - 12, STR_CONV_MODE_RIGHT_ALIGN, 2);
+		ConvertIntToDecimalStringN(gStringVar3, gLocalTime.minutes, STR_CONV_MODE_LEADING_ZEROS, 2);
+		if (gLocalTime.seconds % 2)
+			StringExpandPlaceholders(gStringVar4, gText_StartMenu_CurrentTimePM);
+		else
+			StringExpandPlaceholders(gStringVar4, gText_StartMenu_CurrentTimePMOff);
+	}
+	else
+	{
+		if (gLocalTime.hours == 0)
+			ConvertIntToDecimalStringN(gStringVar2, 12, STR_CONV_MODE_LEADING_ZEROS, 2);
+		else
+			ConvertIntToDecimalStringN(gStringVar2, gLocalTime.hours, STR_CONV_MODE_RIGHT_ALIGN, 2);
+		ConvertIntToDecimalStringN(gStringVar3, gLocalTime.minutes, STR_CONV_MODE_LEADING_ZEROS, 2);
+		if (gLocalTime.seconds % 2)
+			StringExpandPlaceholders(gStringVar4, gText_StartMenu_CurrentTimeAM);
+		else
+			StringExpandPlaceholders(gStringVar4, gText_StartMenu_CurrentTimeAMOff);
+	}
 
-    StringExpandPlaceholders(gStringVar2, gCurrentTimeOfDayList[timeofday]);
-    StringCopy(gStringVar3, gText_StartMenu_TimeOfDay);
+    StringExpandPlaceholders(gStringVar1, gCurrentTimeOfDayList[GetCurrentTimeOfDay()]);
     StringExpandPlaceholders(gStringVar3, gText_StartMenu_TimeOfDay);
 
     x = GetStringRightAlignXOffset(8, gStringVar3, 26 * 8);
@@ -1178,7 +1208,6 @@ static void FullscreenStartMenu_PrintHeaderText(void)
     AddTextPrinterParameterized4(WIN_FSM_QUEST_TOP, 8, x, 4, 0, 4, sHeaderTextColors, 0xFF, gStringVar3);
 
     CopyWindowToVram(WIN_FSM_QUEST_TOP, 2);
-    PutWindowTilemap(WIN_FSM_QUEST_TOP);
 }
 
 #define ICON_TO_WINDOW(id) (id <= 3 ? WIN_FSM_ICONS_TOP : WIN_FSM_ICONS_BOT)
@@ -1260,6 +1289,8 @@ static void FullscreenStartMenu_PrintActions(void)
 
 static void Task_ControlStartMenu(u8 taskId)
 {
+	UpdateHeaderText();
+
     switch(tState)
     {
         case 0:
