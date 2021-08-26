@@ -4414,8 +4414,8 @@
     {
       "id": "LAYOUT_BASE_OUTSIDE",
       "name": "Base_Outside_Layout",
-      "width": 32,
-      "height": 32,
+      "width": 40,
+      "height": 40,
       "primary_tileset": "gTileset_Outside",
       "secondary_tileset": "gTileset_Petalburg",
       "border_filepath": "data/layouts/Base_Outside/border.bin",
