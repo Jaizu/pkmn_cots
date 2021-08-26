@@ -1289,7 +1289,8 @@ static void FullscreenStartMenu_PrintActions(void)
 
 static void Task_ControlStartMenu(u8 taskId)
 {
-	UpdateHeaderText();
+	if (!sStartMenuData->requestScrollOut)
+		UpdateHeaderText();
 
     switch(tState)
     {
