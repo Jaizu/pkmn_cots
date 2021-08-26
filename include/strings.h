@@ -270,7 +270,7 @@ extern const u8 gText_BattlePyramidFloor[];
 extern const u8 gText_MenuOptionPokedex[];
 extern const u8 gText_MenuOptionPokemon[];
 extern const u8 gText_MenuOptionBag[];
-extern const u8 gText_MenuOptionPokenav[];
+extern const u8 gText_MenuOptionQuests[];
 extern const u8 gText_MenuOptionSave[];
 extern const u8 gText_MenuOptionOption[];
 extern const u8 gText_MenuOptionExit[];
@@ -3024,5 +3024,9 @@ extern const u8 gText_Thursday[];
 extern const u8 gText_Friday[];
 extern const u8 gText_Saturday[];
 extern const u8 gText_Sunday[];
+
+extern const u8 gText_StartMenu_Morning[];
+extern const u8 gText_StartMenu_Day[];
+extern const u8 gText_StartMenu_Night[];
 
 #endif // GUARD_STRINGS_H

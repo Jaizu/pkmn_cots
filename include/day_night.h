@@ -24,4 +24,7 @@ void DoLoadSpritePaletteDayNight(const u16 *src, u16 paletteOffset);
 void BufferCurrentDayOfWeekString(void);
 void BufferDayOfWeekString(void);
 
+extern const u8 *const gDayOfWeekTable[];
+extern const u8 *const gCurrentTimeOfDayList[];
+
 #endif // GUARD_DAY_NIGHT_H

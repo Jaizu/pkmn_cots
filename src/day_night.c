@@ -30,12 +30,6 @@ static EWRAM_DATA struct {
     u16 currRGBTint[3];
 } sDNSystemControl = {0};
 
-#if DEBUG
-EWRAM_DATA bool8 gPaletteOverrideDisabled = 0;
-EWRAM_DATA s16 gDNPeriodOverride = 0;
-EWRAM_DATA u16 gDNTintOverride[3] = {0};
-#endif
-
 static const u16 sTimeOfDayTints[][3] = {
     [0] =   {TINT_NIGHT},
     [1] =   {TINT_NIGHT},
@@ -72,6 +66,13 @@ const u8 *const gDayOfWeekTable[] =
 	gText_Friday,
 	gText_Saturday,
 	gText_Sunday
+};
+
+const u8* const gCurrentTimeOfDayList[] =
+{
+    gText_StartMenu_Morning,
+    gText_StartMenu_Day,
+    gText_StartMenu_Night
 };
 
 void BufferCurrentDayOfWeekString(void)
@@ -112,17 +113,7 @@ static void LoadPaletteOverrides(void)
     u16* dest;
     s8 hour;
 
-#if DEBUG
-    if (gPaletteOverrideDisabled)
-        return;
-#endif
-
     hour = gLocalTime.hours;
-
-#if DEBUG
-    if (gDNPeriodOverride > 0)
-        hour = (gDNPeriodOverride - 1) / TINT_PERIODS_PER_HOUR;
-#endif
 
     for (i = 0; i < ARRAY_COUNT(gPaletteOverrides); i++)
     {
@@ -194,15 +185,6 @@ static void TintPaletteForDayNight(u16 offset, u16 size)
 
         hour = gLocalTime.hours;
         hourPhase = gLocalTime.minutes / MINUTES_PER_TINT_PERIOD;
-
-#if DEBUG
-        if (gDNPeriodOverride > 0)
-        {
-            hour = (gDNPeriodOverride - 1) / TINT_PERIODS_PER_HOUR;
-            hourPhase = (gDNPeriodOverride - 1) % TINT_PERIODS_PER_HOUR;
-        }
-#endif
-
         period = (hour * TINT_PERIODS_PER_HOUR) + hourPhase;
 
         if (!sDNSystemControl.initialized || sDNSystemControl.currTintPeriod != period)
@@ -256,43 +238,12 @@ void ProcessImmediateTimeEvents(void)
         {
             hour = gLocalTime.hours;
             hourPhase = gLocalTime.minutes / MINUTES_PER_TINT_PERIOD;
-
-#if DEBUG
-            if (gDNPeriodOverride > 0)
-            {
-                hour = (gDNPeriodOverride - 1) / TINT_PERIODS_PER_HOUR;
-                hourPhase = (gDNPeriodOverride - 1) % TINT_PERIODS_PER_HOUR;
-            }
-            else if (gDNTintOverride[0] > 0 ||
-                     gDNTintOverride[1] > 0 ||
-                     gDNTintOverride[2] > 0)
-            {
-                sDNSystemControl.prevTintPeriod = 0xFFFF; // invalidate current tint
-
-                if (gDNTintOverride[0] == 0xFFFF) // signal to invalidate when turning off override
-                {
-                    gDNTintOverride[0] = 0;
-                }
-            }
-#endif
-
             period = (hour * TINT_PERIODS_PER_HOUR) + hourPhase;
 
             if (!sDNSystemControl.initialized || sDNSystemControl.prevTintPeriod != period)
             {
                 sDNSystemControl.initialized = TRUE;
                 sDNSystemControl.prevTintPeriod = sDNSystemControl.currTintPeriod = period;
-#if DEBUG
-                if (gDNTintOverride[0] > 0 ||
-                    gDNTintOverride[1] > 0 ||
-                    gDNTintOverride[2] > 0)
-                {
-                    sDNSystemControl.currRGBTint[0] = gDNTintOverride[0];
-                    sDNSystemControl.currRGBTint[1] = gDNTintOverride[1];
-                    sDNSystemControl.currRGBTint[2] = gDNTintOverride[2];
-                }
-                else
-#endif
                 {
                     nextHour = (hour + 1) % 24;
                     LerpColors(sDNSystemControl.currRGBTint, sTimeOfDayTints[hour], sTimeOfDayTints[nextHour], hourPhase);

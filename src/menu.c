@@ -94,6 +94,17 @@ static const struct WindowTemplate sYesNo_WindowTemplates =
     .baseBlock = 0x125
 };
 
+static const struct WindowTemplate sYesNo_WindowTemplatesOffset =
+{
+    .bg = 0,
+    .tilemapLeft = 23,
+    .tilemapTop = 8,
+    .width = 5,
+    .height = 4,
+    .paletteNum = 15,
+    .baseBlock = 0x125
+};
+
 const u16 gUnknown_0860F0B0[] = INCBIN_U16("graphics/interface/860F0B0.gbapal");
 const u8 sTextColors[] = { TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY };
 
@@ -461,6 +472,11 @@ void DisplayItemMessageOnField(u8 taskId, const u8 *string, TaskFunc callback)
     LoadMessageBoxAndBorderGfx();
     DisplayMessageAndContinueTask(taskId, 0, DLG_WINDOW_BASE_TILE_NUM, DLG_WINDOW_PALETTE_NUM, 1, GetPlayerTextSpeedDelay(), string, callback);
     CopyWindowToVram(0, 3);
+}
+
+void DisplaySaveOffsetYesNoMenuDefaultYes(void)
+{
+    CreateYesNoMenu(&sYesNo_WindowTemplatesOffset, STD_WINDOW_BASE_TILE_NUM, STD_WINDOW_PALETTE_NUM, 0);
 }
 
 void DisplayYesNoMenuDefaultYes(void)

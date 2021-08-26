@@ -554,7 +554,7 @@ static const struct MenuAction MultichoiceList_ForcedStartMenu[] =
     {gText_MenuOptionPokedex},
     {gText_MenuOptionPokemon},
     {gText_MenuOptionBag},
-    {gText_MenuOptionPokenav},
+    {gText_MenuOptionQuests},
     {gText_Blank}, // blank because it's filled by the player's name
     {gText_MenuOptionSave},
     {gText_MenuOptionOption},

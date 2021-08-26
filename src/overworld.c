@@ -1666,9 +1666,7 @@ void CB2_ReturnToFieldFromMultiplayer(void)
 
 void CB2_ReturnToFieldWithOpenMenu(void)
 {
-    FieldClearVBlankHBlankCallbacks();
-    gFieldCallback2 = FieldCB_ReturnToFieldOpenStartMenu;
-    CB2_ReturnToField();
+    ReturnToFullscreenStartMenu();
 }
 
 void CB2_ReturnToFieldContinueScript(void)

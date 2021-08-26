@@ -1,3 +1,39 @@
+script Debug_Script_1 {
+	warp(MAP_BASE_OUTSIDE, 0, 1, 1)
+	msgbox(format("testing"))
+	closemessage
+}
+
+script Debug_Script_2 {
+	special(BufferCurrentDayOfWeekString)
+	msgbox(format("It's {STR_VAR_1}"))
+	closemessage
+}
+
+script Debug_Script_3 {
+
+}
+
+script Debug_Script_4 {
+
+}
+
+script Debug_Script_5 {
+
+}
+
+script Debug_Script_6 {
+
+}
+
+script Debug_Script_7 {
+
+}
+
+script Debug_Script_8 {
+
+}
+
 raw `
 Debug_ShowFieldMessageStringVar4::
 	special ShowFieldMessageStringVar4
@@ -53,29 +89,5 @@ Debug_CheatStart::
 	@ doweather
 	closemessage
 	release
-	end
-
-Debug_Script_1::
-	end
-
-Debug_Script_2::
-	end
-
-Debug_Script_3::
-	end
-
-Debug_Script_4::
-	end
-
-Debug_Script_5::
-	end
-
-Debug_Script_6::
-	end
-
-Debug_Script_7::
-	end
-
-Debug_Script_8::
 	end
 `

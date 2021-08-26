@@ -55,6 +55,7 @@ void PrintPlayerNameOnWindow(u8, const u8*, u16, u16);
 void ClearDialogWindowAndFrame(u8 windowId, bool8 copyToVram);
 void SetStandardWindowBorderStyle(u8 windowId, bool8 copyToVram);
 void DisplayYesNoMenuDefaultYes(void);
+void DisplaySaveOffsetYesNoMenuDefaultYes(void);
 u32 GetPlayerTextSpeed(void);
 u8 GetPlayerTextSpeedDelay(void);
 void Menu_LoadStdPalAt(u16 arg0);
