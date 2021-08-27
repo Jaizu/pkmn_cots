@@ -518,10 +518,10 @@ static const struct BgTemplate sFullscreenStartMenuBgTemplates[] =
          .baseTile = 0},
 };
 
-#define WIN_FSM_DIALOGUE  0
-#define WIN_FSM_ICONS_TOP 1
-#define WIN_FSM_ICONS_BOT 2
-#define WIN_FSM_QUEST_TOP 3
+#define WIN_FSM_DIALOGUE    0
+#define WIN_FSM_ICONS_TOP   1
+#define WIN_FSM_ICONS_BOT   2
+#define WIN_FSM_HEADER_TEXT 3
 
 static const struct WindowTemplate sFullscreenStartMenuWindowTemplates[] =
 {
@@ -555,7 +555,7 @@ static const struct WindowTemplate sFullscreenStartMenuWindowTemplates[] =
         .paletteNum = 0,
         .baseBlock = 0x55
     },
-    [WIN_FSM_QUEST_TOP] = 
+    [WIN_FSM_HEADER_TEXT] = 
     {
         .bg = 3,
         .tilemapLeft = 2,
@@ -1157,13 +1157,13 @@ static const u8 gText_StartMenu_CurrentTimeAM[] = _("{STR_VAR_1}, {STR_VAR_2}:{S
 static const u8 gText_StartMenu_CurrentTimeAMOff[] = _("{STR_VAR_1}, {STR_VAR_2}  {STR_VAR_3} am");
 static const u8 gText_StartMenu_CurrentTimePM[] = _("{STR_VAR_1}, {STR_VAR_2}:{STR_VAR_3} pm");
 static const u8 gText_StartMenu_CurrentTimePMOff[] = _("{STR_VAR_1}, {STR_VAR_2}  {STR_VAR_3} pm");
-static const u8 gText_PlaceHolderText2[] = _("Something useful will be here!\nSomeday, maybe.");
+static const u8 gText_PlaceHolderText2[] = _("Seems like a great time\nto explore and chill out.");
 static const u8 gText_StartMenu_TimeOfDay[] = _("{STR_VAR_1}");
 
 static void FullscreenStartMenu_PrintHeaderText(void)
 {
 	UpdateHeaderText();
-    PutWindowTilemap(WIN_FSM_QUEST_TOP);
+    PutWindowTilemap(WIN_FSM_HEADER_TEXT);
 }
 
 static void UpdateHeaderText(void)
@@ -1171,7 +1171,7 @@ static void UpdateHeaderText(void)
     //TODO: Print useful info
 	u8 x;
 
-    FillWindowPixelBuffer(WIN_FSM_QUEST_TOP, PIXEL_FILL(7));
+    FillWindowPixelBuffer(WIN_FSM_HEADER_TEXT, PIXEL_FILL(7));
 	RtcCalcLocalTime();
     StringExpandPlaceholders(gStringVar1, gDayOfWeekTable[gLocalTime.dayOfWeek]);
 	if (gLocalTime.hours >= 12)
@@ -1204,11 +1204,11 @@ static void UpdateHeaderText(void)
 
     x = GetStringRightAlignXOffset(8, gStringVar3, 26 * 8);
 
-    AddTextPrinterParameterized4(WIN_FSM_QUEST_TOP, 8, 0, 4, 0, 4, sHeaderTextColors, 0xFF, gStringVar4);
-    AddTextPrinterParameterized4(WIN_FSM_QUEST_TOP, 1, 0, 18, 0, -1, sHeaderTextColors, 0xFF, gText_PlaceHolderText2);
-    AddTextPrinterParameterized4(WIN_FSM_QUEST_TOP, 8, x, 4, 0, 4, sHeaderTextColors, 0xFF, gStringVar3);
+    AddTextPrinterParameterized4(WIN_FSM_HEADER_TEXT, 8, 0, 4, 0, 4, sHeaderTextColors, 0xFF, gStringVar4);
+    AddTextPrinterParameterized4(WIN_FSM_HEADER_TEXT, 1, 0, 18, 0, -1, sHeaderTextColors, 0xFF, gText_PlaceHolderText2);
+    AddTextPrinterParameterized4(WIN_FSM_HEADER_TEXT, 8, x, 4, 0, 4, sHeaderTextColors, 0xFF, gStringVar3);
 
-    CopyWindowToVram(WIN_FSM_QUEST_TOP, 2);
+    CopyWindowToVram(WIN_FSM_HEADER_TEXT, 2);
 }
 
 #define ICON_TO_WINDOW(id) (id <= 3 ? WIN_FSM_ICONS_TOP : WIN_FSM_ICONS_BOT)
