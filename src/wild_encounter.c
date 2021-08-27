@@ -232,7 +232,8 @@ static u8 ChooseWildMonLevel(const struct WildPokemon *wildPokemon)
 {
     u32 level, i, levelCheck;
     u32 percent = ((Random() % 100) < 30) ? 80 : ((Random() % 100) < 70) ? 90 : 100;
-    u8 minus; 
+    u8 minus;
+    u8 plus;
 
 	level = 1;
     
@@ -246,8 +247,19 @@ static u8 ChooseWildMonLevel(const struct WildPokemon *wildPokemon)
     if (!FlagGet(FLAG_COMPLETED_FIST_AREA))
         minus = 1;
 
+    if (!FlagGet(FLAG_COMPLETED_FIST_AREA))
+        plus = 1;
+    else
+        plus = 2;
+
     level = (level * percent) / 100;
-    level = level - minus;
+
+    if (GetCurrentTimeOfDay() == TIME_MORNING)
+        level = level - minus;
+    else if (GetCurrentTimeOfDay() == TIME_DAY)
+        level = level;
+    else
+        level = level - minus + plus;
 
     return level;
 }
