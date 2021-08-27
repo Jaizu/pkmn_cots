@@ -3,7 +3,7 @@
 
 Code:
 
-Pret, Rom Hacking Hideout, Jaizu, Sierra, UltimaSoul, ExpoSeed, Slawter, SBird, Citrus Bolt, DizzyEgg.
+Pret, Rom Hacking Hideout, Jaizu, Sierra, UltimaSoul, ExpoSeed, Slawter, SBird, Citrus Bolt, DizzyEgg, Disturbo.
 
 Graphics:
 
