@@ -1153,12 +1153,20 @@ static void FullscreenStartMenu_CreateSelectors(void)
         gSprites[sStartMenuData->selectorShoeSprite].invisible = TRUE;
 }
 
-static const u8 gText_StartMenu_CurrentTimeAM[] = _("{STR_VAR_1}, {STR_VAR_2}:{STR_VAR_3} am");
-static const u8 gText_StartMenu_CurrentTimeAMOff[] = _("{STR_VAR_1}, {STR_VAR_2}  {STR_VAR_3} am");
-static const u8 gText_StartMenu_CurrentTimePM[] = _("{STR_VAR_1}, {STR_VAR_2}:{STR_VAR_3} pm");
-static const u8 gText_StartMenu_CurrentTimePMOff[] = _("{STR_VAR_1}, {STR_VAR_2}  {STR_VAR_3} pm");
-static const u8 gText_PlaceHolderText2[] = _("Seems like a great time\nto explore and chill out.");
-static const u8 gText_StartMenu_TimeOfDay[] = _("{STR_VAR_1}");
+static const u8 sText_StartMenu_CurrentTimeAM[] = _("{STR_VAR_1}, {STR_VAR_2}:{STR_VAR_3} am");
+static const u8 sText_StartMenu_CurrentTimeAMOff[] = _("{STR_VAR_1}, {STR_VAR_2}  {STR_VAR_3} am");
+static const u8 sText_StartMenu_CurrentTimePM[] = _("{STR_VAR_1}, {STR_VAR_2}:{STR_VAR_3} pm");
+static const u8 sText_StartMenu_CurrentTimePMOff[] = _("{STR_VAR_1}, {STR_VAR_2}  {STR_VAR_3} pm");
+static const u8 sText_MorningDescription[] = _("Did you know that Pokémon\nare weaker on the morning?");
+static const u8 sText_DayDescription[] = _("Seems like a great time\nto explore and chill out.");
+static const u8 sText_NightDescription[] = _("Be careful if you go outside!\nPokémon are stronger at night!");
+
+static const u8 *const sTimeOfDayDescription[] = 
+{
+	sText_MorningDescription,
+	sText_DayDescription,
+	sText_NightDescription
+};
 
 static void FullscreenStartMenu_PrintHeaderText(void)
 {
@@ -1182,9 +1190,9 @@ static void UpdateHeaderText(void)
 			ConvertIntToDecimalStringN(gStringVar2, gLocalTime.hours - 12, STR_CONV_MODE_RIGHT_ALIGN, 2);
 		ConvertIntToDecimalStringN(gStringVar3, gLocalTime.minutes, STR_CONV_MODE_LEADING_ZEROS, 2);
 		if (gLocalTime.seconds % 2)
-			StringExpandPlaceholders(gStringVar4, gText_StartMenu_CurrentTimePM);
+			StringExpandPlaceholders(gStringVar4, sText_StartMenu_CurrentTimePM);
 		else
-			StringExpandPlaceholders(gStringVar4, gText_StartMenu_CurrentTimePMOff);
+			StringExpandPlaceholders(gStringVar4, sText_StartMenu_CurrentTimePMOff);
 	}
 	else
 	{
@@ -1194,19 +1202,16 @@ static void UpdateHeaderText(void)
 			ConvertIntToDecimalStringN(gStringVar2, gLocalTime.hours, STR_CONV_MODE_RIGHT_ALIGN, 2);
 		ConvertIntToDecimalStringN(gStringVar3, gLocalTime.minutes, STR_CONV_MODE_LEADING_ZEROS, 2);
 		if (gLocalTime.seconds % 2)
-			StringExpandPlaceholders(gStringVar4, gText_StartMenu_CurrentTimeAM);
+			StringExpandPlaceholders(gStringVar4, sText_StartMenu_CurrentTimeAM);
 		else
-			StringExpandPlaceholders(gStringVar4, gText_StartMenu_CurrentTimeAMOff);
+			StringExpandPlaceholders(gStringVar4, sText_StartMenu_CurrentTimeAMOff);
 	}
 
-    StringExpandPlaceholders(gStringVar1, gCurrentTimeOfDayList[GetCurrentTimeOfDay()]);
-    StringExpandPlaceholders(gStringVar3, gText_StartMenu_TimeOfDay);
-
-    x = GetStringRightAlignXOffset(8, gStringVar3, 26 * 8);
+    x = GetStringRightAlignXOffset(8, gCurrentTimeOfDayList[GetCurrentTimeOfDay()], 26 * 8);
 
     AddTextPrinterParameterized4(WIN_FSM_HEADER_TEXT, 8, 0, 4, 0, 4, sHeaderTextColors, 0xFF, gStringVar4);
-    AddTextPrinterParameterized4(WIN_FSM_HEADER_TEXT, 1, 0, 18, 0, -1, sHeaderTextColors, 0xFF, gText_PlaceHolderText2);
-    AddTextPrinterParameterized4(WIN_FSM_HEADER_TEXT, 8, x, 4, 0, 4, sHeaderTextColors, 0xFF, gStringVar3);
+    AddTextPrinterParameterized4(WIN_FSM_HEADER_TEXT, 1, 0, 18, 0, -1, sHeaderTextColors, 0xFF, sTimeOfDayDescription[GetCurrentTimeOfDay()]);
+    AddTextPrinterParameterized4(WIN_FSM_HEADER_TEXT, 8, x, 4, 0, 4, sHeaderTextColors, 0xFF, gCurrentTimeOfDayList[GetCurrentTimeOfDay()]);
 
     CopyWindowToVram(WIN_FSM_HEADER_TEXT, 2);
 }
