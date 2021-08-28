@@ -5,9 +5,10 @@ script Debug_Script_1 {
 }
 
 script Debug_Script_2 {
+	namebox(format("Jaizu"))
 	special(BufferCurrentDayOfWeekString)
 	msgbox(format("It's {STR_VAR_1}"))
-	closemessage
+	closeboth
 }
 
 script Debug_Script_3 {

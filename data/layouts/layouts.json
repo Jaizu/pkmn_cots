@@ -4414,12 +4414,22 @@
     {
       "id": "LAYOUT_BASE_OUTSIDE",
       "name": "Base_Outside_Layout",
-      "width": 40,
-      "height": 40,
+      "width": 46,
+      "height": 32,
       "primary_tileset": "gTileset_Outside",
       "secondary_tileset": "gTileset_Petalburg",
       "border_filepath": "data/layouts/Base_Outside/border.bin",
       "blockdata_filepath": "data/layouts/Base_Outside/map.bin"
+    },
+    {
+      "id": "LAYOUT_ROUTE001",
+      "name": "Route001_Layout",
+      "width": 34,
+      "height": 12,
+      "primary_tileset": "gTileset_Outside",
+      "secondary_tileset": "gTileset_Petalburg",
+      "border_filepath": "data/layouts/Route001/border.bin",
+      "blockdata_filepath": "data/layouts/Route001/map.bin"
     }
   ]
 }
