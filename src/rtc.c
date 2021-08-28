@@ -132,21 +132,6 @@ void RtcGetInfo(struct SiiRtcInfo *rtc)
         RtcGetRawInfo(rtc);
 }
 
-void RtcGetInfoFast(struct SiiRtcInfo *rtc)
-{
-    if (sErrorStatus & RTC_ERR_FLAG_MASK)
-        *rtc = sRtcDummy;
-    else
-        RtcGetRawInfoFast(rtc);
-}
-
-void RtcGetTime(struct SiiRtcInfo *rtc)
-{
-    RtcDisableInterrupts();
-    SiiRtcGetTime(rtc);
-    RtcRestoreInterrupts();
-}
-
 void RtcGetDateTime(struct SiiRtcInfo *rtc)
 {
     RtcDisableInterrupts();
@@ -165,12 +150,6 @@ void RtcGetRawInfo(struct SiiRtcInfo *rtc)
 {
     RtcGetStatus(rtc);
     RtcGetDateTime(rtc);
-}
-
-void RtcGetRawInfoFast(struct SiiRtcInfo *rtc)
-{
-    RtcGetStatus(rtc);
-    RtcGetTime(rtc);
 }
 
 u16 RtcCheckInfo(struct SiiRtcInfo *rtc)
@@ -319,12 +298,6 @@ void RtcCalcTimeDifference(struct SiiRtcInfo *rtc, struct Time *result, struct T
 void RtcCalcLocalTime(void)
 {
     RtcGetInfo(&sRtc);
-    RtcCalcTimeDifference(&sRtc, &gLocalTime, &gSaveBlock2Ptr->localTimeOffset);
-}
-
-void RtcCalcLocalTimeFast(void)
-{
-    RtcGetInfoFast(&sRtc);
     RtcCalcTimeDifference(&sRtc, &gLocalTime, &gSaveBlock2Ptr->localTimeOffset);
 }
 
