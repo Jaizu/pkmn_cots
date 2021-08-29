@@ -919,3 +919,15 @@ gTileset_Outside::
 	.4byte gMetatileAttributes_Outside
 	.4byte NULL @ animation callback
 	.4byte NULL @ palette overrides
+
+	.align 2
+gTileset_Base::
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0
+	.4byte gTilesetTiles_Base
+	.4byte gTilesetPalettes_Base
+	.4byte gMetatiles_Base
+	.4byte gMetatileAttributes_Base
+	.4byte NULL @ animation callback
+	.4byte NULL @ palette overrides
