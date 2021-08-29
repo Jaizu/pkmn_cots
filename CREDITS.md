@@ -7,4 +7,4 @@ Pret, Rom Hacking Hideout, Jaizu, Sierra, UltimaSoul, ExpoSeed, Slawter, SBird, 
 
 Graphics:
 
-Alistair, Carchagui, Howdy, Jaizu, Javs, Zein.
+Alistair, Carchagui, Howdy, Jaizu, Javs, Zeo, Zein.
