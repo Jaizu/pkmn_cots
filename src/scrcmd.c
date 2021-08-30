@@ -35,6 +35,7 @@
 #include "pokemon_storage_system.h"
 #include "random.h"
 #include "overworld.h"
+#include "quest_menu.h"
 #include "rotating_tile_puzzle.h"
 #include "rtc.h"
 #include "script.h"
@@ -2354,3 +2355,129 @@ void ScrCmd_closenamebox(void) {
     return;
 }
 
+enum QuestCmdType {UNLOCK, COMPLETE, BUFFER_TITLE, BUFFER_NPC, BUFFER_MAP, CHECK_UNLOCKED, 
+    CHECK_COMPLETED, CHECK_PROGRESS, CHECK_MAX_PROGRESS, CHECK_COMPLETED_PROGRESS,
+    CHECK_COMPLETED_NUM, CHECK_IN_PROGRESS_NUM, CHECK_UNLOCKED_NUM};
+
+bool8 ScrCmd_quest(struct ScriptContext* ctx)
+{
+    u16 *var;
+    u8 stringVarIndex;
+
+    u8 scrType = ScriptReadByte(ctx);
+    u8 questId = (u8) VarGet(ScriptReadHalfword(ctx));
+
+    switch(scrType)
+    {
+        default:
+        case UNLOCK:
+            gSpecialVar_Result = QuestMenu_UnlockQuest(questId);
+            break;
+
+        case COMPLETE:
+            gSpecialVar_Result = QuestMenu_CompleteQuest(questId);
+            break;
+
+        case BUFFER_TITLE:
+            stringVarIndex = ScriptReadByte(ctx);
+            StringCopy(sScriptStringVars[stringVarIndex], QuestMenu_GetQuestTitleText(questId));
+            break;
+
+        case BUFFER_NPC:
+            stringVarIndex = ScriptReadByte(ctx);
+            StringCopy(sScriptStringVars[stringVarIndex], QuestMenu_GetQuestNpcText(questId));
+            break;
+
+        case BUFFER_MAP:
+            stringVarIndex = ScriptReadByte(ctx);
+            StringCopy(sScriptStringVars[stringVarIndex], QuestMenu_GetQuestMapText(questId));
+            break;
+
+        case CHECK_UNLOCKED:
+            var = GetVarPointer(ScriptReadHalfword(ctx));
+            *var = QuestMenu_IsQuestUnlocked(questId);
+            break;
+
+        case CHECK_COMPLETED:
+            var = GetVarPointer(ScriptReadHalfword(ctx));
+            *var = QuestMenu_IsQuestCompleted(questId);
+            break;
+
+        case CHECK_PROGRESS:
+            var = GetVarPointer(ScriptReadHalfword(ctx));
+            *var = QuestMenu_GetQuestCurrentProgress(questId);
+            break;
+
+        case CHECK_MAX_PROGRESS:
+            var = GetVarPointer(ScriptReadHalfword(ctx));
+            *var = QuestMenu_GetMaxProgress(questId);
+            break;
+
+        case CHECK_COMPLETED_PROGRESS:
+            var = GetVarPointer(ScriptReadHalfword(ctx));
+            if (QuestMenu_GetQuestCurrentProgress(questId) >= QuestMenu_GetMaxProgress(questId))
+                *var = TRUE;
+            else
+                *var = FALSE;
+            break;
+
+        case CHECK_COMPLETED_NUM:
+            var = GetVarPointer(ScriptReadHalfword(ctx));
+            *var = QuestMenu_GetCompletedQuestCount();
+            break;
+
+        case CHECK_IN_PROGRESS_NUM:
+            var = GetVarPointer(ScriptReadHalfword(ctx));
+            *var = QuestMenu_GetInProgressQuestCount();
+            break;
+
+        case CHECK_UNLOCKED_NUM:
+            var = GetVarPointer(ScriptReadHalfword(ctx));
+            *var = QuestMenu_GetUnlockedQuestCount();
+            break;
+    }
+    return TRUE;
+}
+
+enum {MODE_ADD, MODE_SUB, MODE_SET};
+
+bool8 ScrCmd_quest_progress(struct ScriptContext* ctx)
+{
+    u8 mode = ScriptReadByte(ctx);
+    u16 questId = ScriptReadHalfword(ctx);
+    u16 amount = ScriptReadHalfword(ctx);
+
+    switch (mode)
+    {
+    case MODE_ADD:
+        QuestMenu_AddProgress(questId, amount);
+        break;
+    
+    case MODE_SUB:
+        QuestMenu_SubProgress(questId, amount);
+        break;
+
+    case MODE_SET:
+        QuestMenu_SetProgress(questId, amount);
+        break;
+
+    default:
+        return FALSE;
+    }
+    return TRUE;
+}
+
+bool8 ScrCmd_show_quest_window_internal(struct ScriptContext* ctx)
+{
+    u16 questId = VarGet(ScriptReadHalfword(ctx));
+    u16 mode = VarGet(ScriptReadHalfword(ctx));
+
+    ShowQuestWindow(questId, mode);
+    return TRUE;
+}
+
+bool8 ScrCmd_hide_quest_window(struct ScriptContext* ctx)
+{
+    HideQuestWindow();
+    return TRUE;
+}

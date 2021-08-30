@@ -9624,4 +9624,26 @@ extern const u8 gMailTilemap_Retro[];
 extern const u8 gMonMarkingsMenu_Gfx[];
 extern const u16 gMonMarkingsMenu_Pal[];
 
+// Quest Menu
+extern const u32 sBgTiles_QuestMenu[];
+extern const u32 sBgMap_QuestMenu_0[];
+extern const u32 sBgMap_QuestMenu_1[];
+extern const u32 sBgMap_QuestMenu_2_10[];
+extern const u32 sBgMap_QuestMenu_2_01[];
+extern const u32 sBgMap_QuestMenu_3_100[];
+extern const u32 sBgMap_QuestMenu_3_010[];
+extern const u32 sBgMap_QuestMenu_3_001[];
+extern const u16 sBgPalette_QuestMenuGeneral[];
+extern const u16 sBgPalette_QuestMenuCompleted[];
+
+extern const u32 sBgTiles_QuestWindow[];
+extern const u32 sBgMap_QuestWindow[];
+extern const u16 sBgPalette_QuestWindow[];
+
+extern const u32 sTiles_ArrowRed[];
+extern const u16 sPalette_ArrowRed[];
+
+extern const u32 sTiles_CustomIcon[];
+extern const u16 sPalette_CustomIcon[];
+
 #endif //GUARD_GRAPHICS_H

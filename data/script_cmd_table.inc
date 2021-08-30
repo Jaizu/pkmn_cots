@@ -229,6 +229,10 @@ gScriptCmdTable::
 	.4byte ScrCmd_bufferitemnameplural      @ 0xe2
 	.4byte ScrCmd_namebox					@ 0xe3
 	.4byte ScrCmd_closenamebox				@ 0xe4
+	.4byte ScrCmd_quest						@ 0xe5
+	.4byte ScrCmd_quest_progress			@ 0xe6
+	.4byte ScrCmd_show_quest_window_internal			@ 0xe7
+	.4byte ScrCmd_hide_quest_window			@ 0xe8
 
 gScriptCmdTableEnd::
 	.4byte ScrCmd_nop

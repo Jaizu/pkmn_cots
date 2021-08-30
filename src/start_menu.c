@@ -645,8 +645,7 @@ static void BuildNormalStartMenu(void)
     AddStartMenuAction(MENU_ACTION_PLAYER);
     AddStartMenuAction(MENU_ACTION_OPTION);
     AddStartMenuAction(MENU_ACTION_BAG);
-    if (FlagGet(FLAG_SYS_POKENAV_GET))
-        AddStartMenuAction(MENU_ACTION_QUESTS);
+    AddStartMenuAction(MENU_ACTION_QUESTS);
     AddStartMenuAction(MENU_ACTION_SAVE);
 }
 
@@ -1843,8 +1842,7 @@ static bool8 StartQuestMenuCallback(void)
         PlayRainStoppingSoundEffect();
         RemoveExtraStartMenuWindows();
         CleanupOverworldWindowsAndTilemaps();
-        // TODO: IMPLEMENT QUEST SYSTEM
-        //SetMainCallback2(CB2_InitQuestMenu); 
+        SetMainCallback2(CB2_InitQuestMenu); 
         
         return TRUE;
     }

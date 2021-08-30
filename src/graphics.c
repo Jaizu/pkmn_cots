@@ -2054,11 +2054,26 @@ const u16 gBerryCrush_Crusher_Pal[] = INCBIN_U16("graphics/berry_crush/crusher.g
 const u32 gBerryCrush_Crusher_Gfx[] = INCBIN_U32("graphics/berry_crush/crusher.4bpp.lz");
 const u32 gBerryCrush_Crusher_Tilemap[] = INCBIN_U32("graphics/berry_crush/crusher.bin.lz");
 
-// random garbage at the end.
-static const u8 sEmpty3[0x54BAC] = {0};
-static const u8 sUnused1[]       = {0x0D, 0x00, 0x58, 0x02};
-static const u8 sEmpty4[0x1145]  = {0};
-static const u8 sUnused2[]       = {0x02};
-static const u8 sEmpty5[0x3242]  = {0};
-static const u8 sUnused3[]       = {0x40};
-static const u8 sEmpty6[0x13]    = {0};
+// Quest menu
+const u32 sBgTiles_QuestMenu[] = INCBIN_U32("graphics/quest_menu/quest_menu_tileset.4bpp.lz");
+const u32 sBgMap_QuestMenu_0[] = INCBIN_U32("graphics/quest_menu/0_quest.bin.lz");
+const u32 sBgMap_QuestMenu_1[] = INCBIN_U32("graphics/quest_menu/1_quest.bin.lz");
+const u32 sBgMap_QuestMenu_2_10[] = INCBIN_U32("graphics/quest_menu/2_quest_10.bin.lz");
+const u32 sBgMap_QuestMenu_2_01[] = INCBIN_U32("graphics/quest_menu/2_quest_01.bin.lz");
+const u32 sBgMap_QuestMenu_3_100[] = INCBIN_U32("graphics/quest_menu/3_quest_100.bin.lz");
+const u32 sBgMap_QuestMenu_3_010[] = INCBIN_U32("graphics/quest_menu/3_quest_010.bin.lz");
+const u32 sBgMap_QuestMenu_3_001[] = INCBIN_U32("graphics/quest_menu/3_quest_001.bin.lz");
+const u16 sBgPalette_QuestMenuGeneral[] = INCBIN_U16("graphics/quest_menu/quest_menu_tileset.gbapal");
+
+const u16 sBgPalette_QuestMenuCompleted[] = INCBIN_U16("graphics/quest_menu/quest_menu_completed_quest.gbapal");
+
+const u32 sBgTiles_QuestWindow[] = INCBIN_U32("graphics/quest_menu/quest_window_tileset.4bpp.lz");
+const u32 sBgMap_QuestWindow[] = INCBIN_U32("graphics/quest_menu/quest_window_tilemap.bin.lz");
+const u16 sBgPalette_QuestWindow[] = INCBIN_U16("graphics/quest_menu/quest_window_tileset.gbapal");
+
+const u32 sTiles_ArrowRed[] = INCBIN_U32("graphics/interface/red_arrow_other.4bpp.lz");
+const u16 sPalette_ArrowRed[] = INCBIN_U16("graphics/interface/red_arrow_other.gbapal");
+
+const u32 sTiles_CustomIcon[] = INCBIN_U32("graphics/quest_menu/icons/dummy.4bpp.lz");
+const u16 sPalette_CustomIcon[] = INCBIN_U16("graphics/quest_menu/icons/dummy.gbapal");
+

@@ -55,6 +55,7 @@
 	STD_FIND_ITEM = 1
 	STD_OBTAIN_DECORATION = 7
 	STD_REGISTER_MATCH_CALL = 8
+	STD_QUEST_SHOW_WINDOW = 11
 
 	@ Calls the standard function at index function.
 	.macro callstd function:req
@@ -1647,6 +1648,76 @@
 	.byte 0xe4
 	.endm
 
+	Q_UNLOCK = 0
+	Q_COMPLETE = 1
+	Q_BUFFER_TITLE = 2
+	Q_BUFFER_NPC = 3
+	Q_BUFFER_MAP = 4
+	Q_CHECK_UNLOCKED = 5
+	Q_CHECK_COMPLETED = 6
+	Q_CHECK_PROGRESS = 7
+	Q_CHECK_MAX_PROGRESS = 8
+	Q_CHECK_COMPLETED_PROGRESS = 9
+	Q_CHECK_COMPLETED_NUM = 10
+	Q_CHECK_IN_PROGRESS_NUM = 11
+	Q_CHECK_UNLOCKED_NUM = 12
+
+	@For the quest system at 'src/quest_menu.c'.	'out' refers to text buffer index, 'var' refers to variable number
+	.macro quest type:req, questId:req, out=0, var=VAR_RESULT
+	.byte 0xe5
+	.byte \type
+	.2byte \questId
+	.if \type == Q_UNLOCK
+	.elseif \type == Q_COMPLETE
+	.elseif \type == Q_BUFFER_TITLE
+		.byte \out
+	.elseif \type == Q_BUFFER_NPC
+		.byte \out
+	.elseif \type == Q_BUFFER_MAP
+		.byte \out
+	.elseif \type == Q_CHECK_UNLOCKED
+		.2byte \var
+	.elseif \type == Q_CHECK_COMPLETED
+		.2byte \var
+	.elseif \type == Q_CHECK_PROGRESS
+		.2byte \var
+	.elseif \type == Q_CHECK_MAX_PROGRESS
+		.2byte \var
+	.elseif \type == Q_CHECK_COMPLETED_PROGRESS
+		.2byte \var
+	.elseif \type == Q_CHECK_COMPLETED_NUM
+		.2byte \var
+	.elseif \type == Q_CHECK_IN_PROGRESS_NUM
+		.2byte \var
+	.elseif \type == Q_CHECK_UNLOCKED_NUM
+		.2byte \var
+	.endif
+	.endm
+
+	Q_ADD = 0
+	Q_SUB = 1
+	Q_SET = 2
+
+	.macro quest_progress mode:req, questId:req, arg:req
+	.byte 0xe6
+	.byte \mode
+	.2byte \questId
+	.2byte \arg
+	.endm
+
+	UPDATE_NEW = 0
+	UPDATE_PROGRESS = 1
+	UPDATE_COMPLETED = 2
+
+	.macro show_quest_window_internal questId:req, mode:req
+	.byte 0xe7
+	.2byte \questId
+	.2byte \mode
+	.endm
+
+	.macro hide_quest_window
+	.byte 0xe8
+	.endm
 
 @ Supplementary
 
@@ -1810,6 +1881,12 @@
 	setfieldeffectargument 1, \y
 	setfieldeffectargument 2, \priority
 	dofieldeffect FLDEFF_SPARKLE
+	.endm
+
+	.macro show_quest_window questId:req, mode:req
+	setorcopyvar VAR_0x8000, \questId
+	setorcopyvar VAR_0x8001, \mode
+	callstd STD_QUEST_SHOW_WINDOW
 	.endm
 
 	@ Set up a totem boost for the next battle.

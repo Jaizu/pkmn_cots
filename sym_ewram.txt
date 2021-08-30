@@ -151,3 +151,4 @@
 	.include "src/rayquaza_scene.o"
 	.include "src/debug.o"
 	.include "src/field_name_box.o"
+	.include "src/quest_menu.o"

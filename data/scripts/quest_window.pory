@@ -1,0 +1,22 @@
+script Std_QuestShowWindow {
+    lockall
+    playfanfare(MUS_SLOTS_WIN)
+    show_quest_window_internal(VAR_0x8000, VAR_0x8001)
+    switch(var(VAR_0x8001))
+    {
+        case UPDATE_NEW:
+            message(format("A new quest has been added to the quest menu."))
+        case UPDATE_PROGRESS:
+            message(format("The quest progress was updated in the quest menu."))
+        case UPDATE_COMPLETED:
+            quest(Q_CHECK_COMPLETED_NUM, VAR_0x8000, 1, VAR_0x8002)
+            buffernumberstring(0, VAR_0x8002)
+            message(format("You completed a quest!\nQuests completed: {COLOR RED}{STR_VAR_1}"))
+    }
+    waitfanfare
+	waitmessage
+	waitbuttonpress
+    closemessage
+	releaseall
+    hide_quest_window
+}    

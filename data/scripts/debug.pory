@@ -12,7 +12,12 @@ script Debug_Script_2 {
 }
 
 script Debug_Script_3 {
-
+	message(format("Test"))
+	waitmessage
+	waitbuttonpress
+	closemessage
+	quest(Q_UNLOCK, QUEST_1)
+	show_quest_window(QUEST_1, UPDATE_NEW)
 }
 
 script Debug_Script_4 {
