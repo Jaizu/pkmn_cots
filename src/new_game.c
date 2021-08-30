@@ -45,6 +45,8 @@
 #include "berry_powder.h"
 #include "mevent.h"
 #include "union_room_chat.h"
+#include "strings.h"
+#include "string_util.h"
 
 extern const u8 EventScript_ResetAllMapFlags[];
 
@@ -161,6 +163,7 @@ void NewGameInitData(void)
     ClearMailData();
     gSaveBlock2Ptr->specialSaveWarpFlags = 0;
     gSaveBlock2Ptr->gcnLinkFlags = 0;
+    SeedRngAndSetTrainerId();
     InitPlayerTrainerId();
     PlayTimeCounter_Reset();
     ClearPokedexFlags();
@@ -204,6 +207,7 @@ void NewGameInitData(void)
     WipeTrainerNameRecords();
     ResetTrainerHillResults();
     ResetContestLinkResults();
+    StringCopy(gSaveBlock2Ptr->playerName, gText_DefaultNameTerry);
     gSaveBlock1Ptr->autoRun = FALSE;
 }
 
