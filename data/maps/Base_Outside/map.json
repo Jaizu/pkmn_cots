@@ -35,7 +35,13 @@
     }
   ],
   "warp_events": [
-
+    {
+      "x": 11,
+      "y": 10,
+      "elevation": 0,
+      "dest_map": "MAP_BASE_OUTSIDE",
+      "dest_warp_id": 0
+    }
   ],
   "coord_events": [
 

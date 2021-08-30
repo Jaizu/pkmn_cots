@@ -95,7 +95,8 @@
     "Underwater_Route105",
     "Underwater_Route125",
     "Base_Outside",
-    "Route001"
+    "Route001",
+    "Base_House"
   ],
   "gMapGroup_IndoorLittleroot": [
     "LittlerootTown_BrendansHouse_1F",
