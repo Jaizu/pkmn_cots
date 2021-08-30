@@ -17,7 +17,7 @@ If you contribute feel free to add yourself to [CREDITS.md](https://github.com/J
 ## What can/can't I use from the project?
 
 * You are free to take mechanics and code related stuff, always crediting the authors.
-* You can not take the following systems, since they belong to [Pokémon Polar](https://jaizu.moe/discord): Start Menu, Quest System. (yet to be implemented)
+* You can not take the following systems, since they belong to [Pokémon Polar](https://jaizu.moe/discord): Start Menu, Quest System.
 * Graphical resources that are modified for this game; I credited everybody, so if you need something you can try your luck looking in the credits file.
 
 ## Credits
