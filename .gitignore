@@ -39,3 +39,4 @@ porymap.project.cfg
 /*.zip
 /*.rar
 data/scripts/debug.inc
+data/scripts/movement.inc

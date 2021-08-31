@@ -56,6 +56,10 @@ Common_Movement_FaceUp:
 	face_up
 	step_end
 
+Common_Movement_WalkInPlaceUp:
+	walk_in_place_up
+	step_end
+
 Common_Movement_WalkInPlaceDown:
 	walk_in_place_down
 	step_end
@@ -93,8 +97,44 @@ Common_Movement_WalkUp:
 	walk_up
 	step_end
 
-@ Unused
-Common_Movement_WalkUp2::
-	walk_up
-	walk_up
+Common_Movement_WalkLeft:
+	walk_left
 	step_end
+
+Common_Movement_WalkRight:
+	walk_right
+	step_end
+
+Common_Movement_WalkDown:
+	walk_down
+	step_end
+
+Common_Movement_EmoteHeart:
+	emote_heart
+	step_end
+
+Common_Movement_JumpInPlaceDown2:
+	jump_in_place_down
+	jump_in_place_down
+	step_end
+
+Common_Movement_JumpInPlaceUp2:
+	jump_in_place_up
+	jump_in_place_up
+	step_end
+
+Common_Movement_JumpInPlaceLeft2:
+	jump_in_place_left
+	jump_in_place_left
+	step_end
+
+Common_Movement_JumpInPlaceRight2:
+	jump_in_place_right
+	jump_in_place_right
+	step_end
+
+stop_running::
+	lockall
+	releaseall
+	return
+
