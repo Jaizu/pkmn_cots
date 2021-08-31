@@ -259,7 +259,7 @@ static u8 ChooseWildMonLevel(const struct WildPokemon *wildPokemon)
     else if (GetCurrentTimeOfDay() == TIME_DAY)
         level = level;
     else
-        level = level - minus + plus;
+        level = level + plus;
 
     return level - 1;
 }
