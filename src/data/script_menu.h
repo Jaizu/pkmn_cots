@@ -778,6 +778,17 @@ static const struct MenuAction MultichoiceList_Starter[] =
     {gText_Squirtle},
 };
 
+static const struct MenuAction MultichoiceList_DayOfWeek[] =
+{
+    {gText_Monday},
+    {gText_Tuesday},
+    {gText_Wednesday},
+    {gText_Thursday},
+    {gText_Friday},
+    {gText_Saturday},
+    {gText_Sunday},
+};
+
 static const struct MenuAction MultichoiceList_Exit[] =
 {
     {gText_Exit},
@@ -906,6 +917,7 @@ static const struct MultichoiceListStruct sMultichoiceLists[] =
     [MULTI_FALLARBOR_TENT_RULES]       = MULTICHOICE(MultichoiceList_FallarborTentRules),
     [MULTI_TAG_MATCH_TYPE]             = MULTICHOICE(MultichoiceList_TagMatchType),
     [MULTI_STARTER]                    = MULTICHOICE(MultichoiceList_Starter),
+    [MULTI_DAY_OF_WEEK]                = MULTICHOICE(MultichoiceList_DayOfWeek),
 };
 
 const u8 *const gStdStrings[] =

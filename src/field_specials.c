@@ -2422,6 +2422,16 @@ void ShowScrollableMultichoice(void)
             task->tKeepOpenAfterSelect = FALSE;
             task->tTaskId = taskId;
             break;
+        case SCROLL_DAYOFWEEK:
+            task->tMaxItemsOnScreen = 1;
+            task->tNumItems = 7;
+            task->tLeft = 20;
+            task->tTop = 11;
+            task->tWidth = 12;
+            task->tHeight = 2;
+            task->tKeepOpenAfterSelect = FALSE;
+            task->tTaskId = taskId;
+            break;
         default:
             gSpecialVar_Result = MULTI_B_PRESSED;
             DestroyTask(taskId);
@@ -2582,6 +2592,16 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         gText_Underpowered,
         gText_WhenInDanger,
         gText_Exit
+    },
+    [SCROLL_DAYOFWEEK] =
+    {
+        gText_Monday,
+        gText_Tuesday,
+        gText_Wednesday,
+        gText_Thursday,
+        gText_Friday,
+        gText_Saturday,
+        gText_Sunday
     }
 };
 
@@ -2690,9 +2710,11 @@ static void ScrollableMultichoice_ProcessInput(u8 taskId)
     case LIST_NOTHING_CHOSEN:
         break;
     case LIST_CANCEL:
-        gSpecialVar_Result = MULTI_B_PRESSED;
-        PlaySE(SE_SELECT);
-        CloseScrollableMultichoice(taskId);
+        if (gSpecialVar_0x8005 == 1) {
+            gSpecialVar_Result = MULTI_B_PRESSED;
+            PlaySE(SE_SELECT);
+            CloseScrollableMultichoice(taskId);
+        }
         break;
     default:
         gSpecialVar_Result = input;
@@ -2790,9 +2812,9 @@ static void ScrollableMultichoice_UpdateScrollArrows(u8 taskId)
     if (task->tMaxItemsOnScreen != task->data[1])
     {
         template.firstX = (task->tWidth / 2) * 8 + 12 + (task->tLeft - 1) * 8;
-        template.firstY = 8;
+        template.firstY = task->tTop * 8 - 4;
         template.secondX = (task->tWidth / 2) * 8 + 12 + (task->tLeft - 1) * 8;
-        template.secondY = task->tHeight * 8 + 10;
+        template.secondY = task->tHeight * 8 + 10 + (task->tTop - 1) * 8 + 4;
         template.fullyUpThreshold = 0;
         template.fullyDownThreshold = task->data[1] - task->tMaxItemsOnScreen;
         task->tScrollArrowId = AddScrollIndicatorArrowPair(&template, &sScrollableMultichoice_ScrollOffset);
