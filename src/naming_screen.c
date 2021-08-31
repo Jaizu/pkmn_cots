@@ -25,6 +25,8 @@
 #include "menu.h"
 #include "text_window.h"
 #include "overworld.h"
+#include "main_menu.h"
+#include "random.h"
 #include "constants/event_objects.h"
 #include "constants/rgb.h"
 
@@ -415,6 +417,12 @@ void DoNamingScreen(u8 templateNum, u8 *destBuffer, u16 monSpecies, u16 monGende
 
         SetMainCallback2(CB2_LoadNamingScreen);
     }
+}
+
+void DoNamingScreen_PlayerContinueScript(void)
+{
+    NewGameBirchSpeech_SetDefaultPlayerName(Random() % 20);
+    DoNamingScreen(0, gSaveBlock2Ptr->playerName, gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnToFieldContinueScript);
 }
 
 static void CB2_LoadNamingScreen(void)

@@ -539,3 +539,4 @@ gSpecials::
 	def_special RtcSetDayOfWeek
 	def_special BufferCurrentDayOfWeekString
 	def_special BufferDayOfWeekString
+	def_special DoNamingScreen_PlayerContinueScript
