@@ -245,12 +245,12 @@ static u8 ChooseWildMonLevel(const struct WildPokemon *wildPokemon)
 	}
 
     if (!FlagGet(FLAG_COMPLETED_FIST_AREA))
-        minus = 1;
+        minus = 2;
 
     if (!FlagGet(FLAG_COMPLETED_FIST_AREA))
-        plus = 1;
+        plus = 0;
     else
-        plus = 2;
+        plus = 1;
 
     level = (level * percent) / 100;
 
@@ -261,7 +261,7 @@ static u8 ChooseWildMonLevel(const struct WildPokemon *wildPokemon)
     else
         level = level - minus + plus;
 
-    return level;
+    return level - 1;
 }
 
 static u16 GetCurrentMapWildMonHeaderId(void)
