@@ -207,7 +207,6 @@ void NewGameInitData(void)
     WipeTrainerNameRecords();
     ResetTrainerHillResults();
     ResetContestLinkResults();
-    StringCopy(gSaveBlock2Ptr->playerName, gText_DefaultNameTerry);
     gSaveBlock1Ptr->autoRun = FALSE;
 }
 
