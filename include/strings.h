@@ -3029,4 +3029,8 @@ extern const u8 gText_StartMenu_Morning[];
 extern const u8 gText_StartMenu_Day[];
 extern const u8 gText_StartMenu_Night[];
 
+extern const u8 gText_Bulbasaur[];
+extern const u8 gText_Charmander[];
+extern const u8 gText_Squirtle[];
+
 #endif // GUARD_STRINGS_H

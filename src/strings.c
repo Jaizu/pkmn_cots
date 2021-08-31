@@ -1831,3 +1831,7 @@ const u8 gText_Sunday[] = _("Sunday");
 const u8 gText_StartMenu_Morning[] = _("Morning");
 const u8 gText_StartMenu_Day[] = _("Day");
 const u8 gText_StartMenu_Night[] = _("Night");
+
+const u8 gText_Bulbasaur[] = _("Bulbasaur");
+const u8 gText_Charmander[] = _("Charmander");
+const u8 gText_Squirtle[] = _("Squirtle");
