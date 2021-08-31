@@ -4434,10 +4434,10 @@
     {
       "id": "LAYOUT_BASE_HOUSE",
       "name": "Base_House_Layout",
-      "width": 20,
-      "height": 20,
+      "width": 14,
+      "height": 12,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_BrendansMaysHouse",
+      "secondary_tileset": "gTileset_GenericBuilding",
       "border_filepath": "data/layouts/Base_House/border.bin",
       "blockdata_filepath": "data/layouts/Base_House/map.bin"
     }

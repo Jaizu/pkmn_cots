@@ -1,1 +1,221 @@
-mapscripts Base_House_MapScripts {}
+const DAD = 2
+const CLAU = 1
+
+mapscripts Base_House_MapScripts {
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_UNUSED_0x404E, 0 {
+            delay(32)
+			playse(SE_EXIT)
+            addobject(DAD)
+            delay(32)
+            namebox("???")
+            msgbox(format("Oh. Looks like someone has woken up."))
+            closeboth
+            special(SpawnCameraObject)
+            applymovement(OBJ_EVENT_ID_CAMERA, Base_House_Movement_CameraIntoRivalDad)
+            waitmovement(0)
+            applymovement(OBJ_EVENT_ID_PLAYER, Base_House_Movement_PlayerOutOfBed)
+            waitmovement(0)
+            applymovement(OBJ_EVENT_ID_CAMERA, Base_House_Movement_CameraBackToPlayer)
+            applymovement(DAD, Base_House_Movement_RivalDadIntoPlayer)
+            waitmovement(0)
+            namebox("???")
+            msgbox(format(
+                "You shouldn't be too tired, you've slept for twenty years."
+                "\pMaybe even longer."))
+            closeboth
+            delay(32)
+            applymovement(DAD, Base_House_Movement_RivalDadStepBackwards)
+            applymovement(OBJ_EVENT_ID_CAMERA, Common_Movement_WalkDown)
+            waitmovement(DAD) // Ikd why I need to set it like this instead 0, otherwise next movement won't work
+            playse(SE_PIN)
+            applymovement(DAD, Common_Movement_QuestionMark)
+            waitmovement(0)
+            waitse
+            delay(32)
+            namebox("???")
+            msgbox(format("You're not finding this funny?"))
+            closeboth
+            turnobject(DAD, DIR_SOUTH)
+            namebox("???")
+            msgbox(format(
+                "Maybe my jokes are not for young people.\p"
+                "What's the secret? Why can't I be like a young man?\p"
+                "It's not like the kid is making a lot of conversation either.\p"
+                "I know, I will bring up a topic of conversation."))
+            closeboth
+            applymovement(DAD, Common_Movement_WalkUp)
+            applymovement(OBJ_EVENT_ID_CAMERA, Common_Movement_WalkUp)
+            waitmovement(0)
+            special(RemoveCameraObject)
+            namebox("???")
+            msgbox(format(
+                "Hey kid, this conversation doesn't seem to be going very far. How about I ask you a couple of questions?\p"
+                "Yeah, yeah, maybe with a little more information we could make this less boring.\p"
+                "What's your favorite food?")) // Mother 3 reference btw
+            closeboth
+            delay(32)
+			playse(SE_EXIT)
+            addobject(CLAU)
+            turnobject(DAD, DIR_SOUTH)
+            delay(32)
+            namebox("???")
+            msgbox(format("DAD!!"))
+            closeboth
+            applymovement(CLAU, Base_House_Movement_RivalIntoRivalDad)
+            waitmovement(0)
+            turnobject(DAD, DIR_WEST)
+            namebox("???")
+            msgbox(format("What are you doing? Can you not disturb our guest?"))
+            namebox("Dad of ???")
+            msgbox(format("But honey, I was just trying to make conversation."))
+            namebox("???")
+            msgbox(format("By giving him a huge interrogation??\p"
+            "Go on, go away, leave it to me, you're not good at this sort of thing."))
+            namebox("Dad of ???")
+            msgbox(format("How do you expect me to be good at this if we're literally isolated?"))
+            namebox("???")
+            msgbox(format(
+                "We're not completely isolated, we also have neighbors.\p"
+                "And go away, you're scaring our guest."))
+            namebox("Dad of ???")
+            msgbox(format("I'll never understand young people…"))
+            closeboth
+            applymovement(DAD, Base_House_Movement_RivalsDadOutOfScene)
+            delay(24)
+            applymovement(CLAU, Base_House_Movement_RivalIntoPlayer)
+            waitmovement(DAD)
+            playse(SE_EXIT)
+            removeobject(DAD)
+            waitmovement(CLAU)
+            namebox("???")
+            msgbox(format("Hello! I'm sorry about my dad's manners…"))
+            closeboth
+            namebox("Clau")
+            msgbox(format("My name is {COLOR RED}Clau{COLOR DARK_GRAY}.\p"
+            "You see, there's not much socializing on this island, and my father is not very good at this sort of thing.\p"
+            "Are you better? How did you end up on this island?"))
+            closeboth
+            delay(32)
+            namebox("Clau")
+            msgbox(format("Oh, you really don't remember anything? Not even when we picked you up?\lLet me refresh your memory!\p"
+            "You were lying on the beach, right in front of the shore.\p"
+            "You weren't alone thought, you had a Pokeball with you, we assume it's your Pokémon."))
+            closemessage
+            message(format("Which Pokémon do you have?"))
+            waitmessage
+            multichoice(19, 6, MULTI_STARTER, TRUE)
+            closemessage
+            switch (var(VAR_RESULT)) {
+                case 0:
+                    givemon(SPECIES_BULBASAUR, 5, ITEM_ORAN_BERRY)
+                case 1:
+                    givemon(SPECIES_CHARMANDER, 5, ITEM_ORAN_BERRY)
+                case 2:
+                    givemon(SPECIES_SQUIRTLE, 5, ITEM_ORAN_BERRY)
+            }
+            setflag(FLAG_SYS_POKEMON_GET)
+            closeboth
+            namebox("Clau")
+            msgbox(format("And does it have a name?"), MSGBOX_YESNO)
+            if (var(VAR_RESULT) == YES) {
+                fadescreen(FADE_TO_BLACK)
+                special(ChangePokemonNickname)
+                waitstate
+            }
+            closeboth
+            namebox("Clau")
+            msgbox(format(
+                "Oh I see. Anyway, where was I?\nAh, I remember!\p"
+            "You were lying on the shore of the beach next to your Pokéball.\p"
+            "My father didn't hesitate to bring you from the beach, even though it's nowhere near!\p"
+            "And then you woke up and well, here we are."))
+            closeboth
+            delay(32)
+            namebox("Clau")
+            msgbox(format("Still don't remember anything? Not even your name? Because wow, that's a problem.\p"
+            "How about you tell me your name and then when you remember your name you can change it?"))
+            closeboth
+            special(DoNamingScreen_PlayerContinueScript)
+            waitstate
+            namebox("Clau")
+            msgbox(format(
+                "Then I'll call you {COLOR RED}{PLAYER}{COLOR DARK_GRAY}!\n"
+                "And I'm sorry I can't help you more, but maybe someone else can.\p"
+                "On the other side of the island there is a crazy young man, who despite being out of his mind, may be able to help you.\p"
+                "Although if you go there I hope you're prepared, it's not easy, this island is full of wild Pokemon."))
+            closeboth
+            delay(32)
+            namebox("Clau")
+            msgbox(format("We have been talking for a while, what time is it?"))
+            closeboth
+            fadescreen(FADE_TO_BLACK)
+            special(StartWallClock)
+            waitstate
+            message(format("And while we're at it tell me the day of the week! "))
+            waitmessage
+            setvar(VAR_0x8005, 0)
+            setvar(VAR_0x8004, SCROLL_DAYOFWEEK)
+            special(ShowScrollableMultichoice)
+            waitstate
+            closemessage
+            copyvar(VAR_0x8004, VAR_RESULT)
+            special(RtcSetDayOfWeek)
+            namebox("Clau")
+            msgbox(format(
+                "That should do it. Pokemon are weaker in the {COLOR RED}morning{COLOR DARK_GRAY} and stronger at {COLOR RED}night{COLOR DARK_GRAY}.\l"
+                "If you open the {COLOR RED}Start Menu{COLOR DARK_GRAY} you will have a little more information about what time it is.\p"
+                "{COLOR RED}{PLAYER}{COLOR DARK_GRAY}, I wish you the best of luck remembering who you are.\p"
+                "In the meantime I'm going to help my father to get resources.\p"
+                "You should explore as much as you can too, this island is full of wonderful things!"))
+            closeboth
+            applymovement(CLAU, Base_House_Movement_ClauOutOfTheScene)
+            waitmovement(0)
+            playse(SE_EXIT)
+            removeobject(CLAU)
+            setvar(VAR_UNUSED_0x404E, 1)
+        }
+    ]
+}
+
+movement Base_House_Movement_CameraIntoRivalDad {
+    walk_diag_southeast * 2
+    walk_down
+}
+
+movement Base_House_Movement_PlayerOutOfBed {
+    walk_right * 2
+    face_down    
+}
+
+movement Base_House_Movement_CameraBackToPlayer {
+    walk_up * 3
+}
+
+movement Base_House_Movement_RivalDadIntoPlayer {
+    walk_up * 4
+}
+
+movement Base_House_Movement_RivalDadStepBackwards {
+	lock_facing_direction
+	walk_down
+	unlock_facing_direction   
+}
+
+movement Base_House_Movement_RivalIntoRivalDad {
+    walk_up * 4
+    face_right
+}
+
+movement Base_House_Movement_RivalsDadOutOfScene {
+    walk_down * 4
+}
+
+movement Base_House_Movement_RivalIntoPlayer {
+    walk_right
+    face_up
+}
+
+movement Base_House_Movement_ClauOutOfTheScene {
+    walk_down * 4    
+}

@@ -39,7 +39,7 @@
       "x": 11,
       "y": 10,
       "elevation": 0,
-      "dest_map": "MAP_BASE_OUTSIDE",
+      "dest_map": "MAP_BASE_HOUSE",
       "dest_warp_id": 0
     }
   ],
