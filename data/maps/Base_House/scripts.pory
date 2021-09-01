@@ -108,21 +108,13 @@ mapscripts Base_House_MapScripts {
             closemessage
             switch (var(VAR_RESULT)) {
                 case 0:
-                    givemon(SPECIES_BULBASAUR, 5, ITEM_ORAN_BERRY)
+                    setvar(VAR_STARTER_MON, 0)
                 case 1:
-                    givemon(SPECIES_CHARMANDER, 5, ITEM_ORAN_BERRY)
+                    setvar(VAR_STARTER_MON, 1)
                 case 2:
-                    givemon(SPECIES_SQUIRTLE, 5, ITEM_ORAN_BERRY)
+                    setvar(VAR_STARTER_MON, 2)
             }
             setflag(FLAG_SYS_POKEMON_GET)
-            closeboth
-            namebox("Clau")
-            msgbox(format("And does it have a name?"), MSGBOX_YESNO)
-            if (var(VAR_RESULT) == YES) {
-                fadescreen(FADE_TO_BLACK)
-                special(ChangePokemonNickname)
-                waitstate
-            }
             closeboth
             namebox("Clau")
             msgbox(format(
@@ -138,6 +130,7 @@ mapscripts Base_House_MapScripts {
             closeboth
             special(DoNamingScreen_PlayerContinueScript)
             waitstate
+            callnative(InitPlayerTrainerId)
             namebox("Clau")
             msgbox(format(
                 "Then I'll call you {COLOR RED}{PLAYER}{COLOR DARK_GRAY}!\n"
@@ -172,6 +165,14 @@ mapscripts Base_House_MapScripts {
             applymovement(CLAU, Base_House_Movement_ClauOutOfTheScene)
             waitmovement(0)
             playse(SE_EXIT)
+            switch(var(VAR_STARTER_MON)) {
+                case 0:
+                    givemon(SPECIES_BULBASAUR, 5, ITEM_ORAN_BERRY)
+                case 1:
+                    givemon(SPECIES_CHARMANDER, 5, ITEM_ORAN_BERRY)
+                case 2:
+                    givemon(SPECIES_SQUIRTLE, 5, ITEM_ORAN_BERRY)
+            }
             removeobject(CLAU)
             setvar(VAR_UNUSED_0x404E, 1)
         }
