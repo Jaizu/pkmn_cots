@@ -15,10 +15,7 @@ EventScript_LoseableBattleNoIntro::
 	goto_if_ne EventScript_NoNormalTrainerBattle
 	special PlayTrainerEncounterMusic
 	special SetTrainerFacingDirection
-	special TryPrepareSecondApproachingTrainer
-	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_TrainerApproach
-	goto EventScript_DoTrainerBattle
+	goto EventScript_ShowTrainerIntroMsg
 
 EventScript_TryDoNormalTrainerBattle::
 	lock
@@ -124,10 +121,6 @@ EventScript_ShowTrainerIntroMsg::
 	special ShowTrainerIntroSpeech
 	waitmessage
 	waitbuttonpress
-	special TryPrepareSecondApproachingTrainer
-	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_TrainerApproach
-	goto EventScript_DoTrainerBattle
 
 EventScript_DoTrainerBattle::
 	trainerbattlebegin

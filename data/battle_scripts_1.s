@@ -5082,7 +5082,7 @@ BattleScript_LocalBattleLost::
 BattleScript_LocalBattleLostPrintWhiteOut::
 	printstring STRINGID_PLAYERWHITEOUT
 	waitmessage B_WAIT_TIME_LONG
-	jumpifhalfword CMP_EQUAL, gTrainerBattleMode, TRAINER_BATTLE_CONTINUE_AFTER_LOSE, BattleScript_LocalBattleLostPrintWhiteOutNoWhiteOut2
+	jumpifhalfword CMP_EQUAL, gTrainerBattleMode, TRAINER_BATTLE_NO_WHITEOUT, BattleScript_LocalBattleLostPrintWhiteOutNoWhiteOut2
 	printstring STRINGID_PLAYERWHITEOUT2
 	waitmessage B_WAIT_TIME_LONG
 BattleScript_LocalBattleLostEnd::

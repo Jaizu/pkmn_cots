@@ -21,7 +21,18 @@ script Debug_Script_3 {
 }
 
 script Debug_Script_4 {
+	trainerbattle_no_whiteout(TRAINER_CALVIN_1, "Intro text yay", "I lost!", Debug_Script_4_PostBattle)
+}
 
+script Debug_Script_4_PostBattle {
+    specialvar(VAR_RESULT, GetBattleOutcome)
+    if (var(VAR_RESULT) == B_OUTCOME_WON) {
+        msgbox(format("I didn't know I could lose this!"))
+    } else {
+        msgbox(format("You are too weak to face me."))
+    }
+    special(HealPlayerParty)
+    closemessage
 }
 
 script Debug_Script_5 {

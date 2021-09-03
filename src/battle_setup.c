@@ -1196,7 +1196,7 @@ const u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data)
             gTrainerBattleOpponent_B = LocalIdToHillTrainerId(gSpecialVar_LastTalked);
         }
         return EventScript_TryDoNormalTrainerBattle;
-    case TRAINER_BATTLE_CONTINUE_AFTER_LOSE:
+    case TRAINER_BATTLE_NO_WHITEOUT:
         if (gApproachingTrainerId == 0)
         {
             TrainerBattleLoadArgs(sContinueScriptBattleParams, data);
@@ -1207,7 +1207,6 @@ const u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data)
             TrainerBattleLoadArgs(sTrainerBContinueScriptBattleParams, data);
         }
         return EventScript_LoseableBattleNoIntro;
-        break;
     default:
         if (gApproachingTrainerId == 0)
         {
@@ -1364,7 +1363,7 @@ static void CB2_EndTrainerBattle(void)
     }
     else if (IsPlayerDefeated(gBattleOutcome) == TRUE)
     {
-        if (InBattlePyramid() || InTrainerHillChallenge() || gTrainerBattleMode == TRAINER_BATTLE_CONTINUE_AFTER_LOSE)
+        if (InBattlePyramid() || InTrainerHillChallenge() || gTrainerBattleMode == TRAINER_BATTLE_NO_WHITEOUT)
             SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
         else
             SetMainCallback2(CB2_WhiteOut);
